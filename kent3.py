@@ -1,7 +1,7 @@
 from scipy.special import iv as I_, gamma as G_
 import numpy as np
 
-def __c(kappa, beta, terms=100):
+def __c(kappa, beta, terms):
     """
     Calculates the normalization constant for the Kent (FB5) distribution.
 
@@ -14,7 +14,7 @@ def __c(kappa, beta, terms=100):
         The normalization constant.
     """
     su = 0
-    for j in range(0, 10):
+    for j in range(0, terms):
         su += G_(j + .5) / G_(j + 1) * beta**(2*j) * (2/kappa)**(2*j + .5) * I_(2*j + .5, kappa)
         #print(j, I_(2*j+0.5, kappa))
     return 2 * np.pi * su
@@ -49,8 +49,8 @@ def evaluate_constant(kappa, beta, max_iterations=1000):
     return results
 
 # Example usage with fixed kappa and beta
-kappa = 3
-beta = 0.3
+kappa = 7
+beta = 3
 results = evaluate_constant(kappa, beta)
 
 # Print results in a table
