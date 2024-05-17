@@ -17,13 +17,15 @@ def __c(kappa, beta, terms):
     for j in range(0, terms):
         su += G_(j + .5) / G_(j + 1) * beta**(2*j) * (2/kappa)**(2*j + .5) * I_(2*j + .5, kappa)
         #print(j, I_(2*j+0.5, kappa))
+
+    print(f'Primeiro termo: {2*np.pi*G_(.5) / G_(1) * (2/kappa)**(.5) * I_(.5, kappa)}')
     return 2 * np.pi * su
 
 def c_approx(kappa, beta):
     """Corrected approximation for the normalization constant c(kappa, beta)."""
-    #return (2 * np.pi)**(3/2) * np.exp(-kappa) * ((kappa - 2 * beta) * (kappa + 2 * beta))**(-0.5)
-    #return (kappa - 2 * beta) / (kappa + 2 * beta)
     return 2*np.pi*np.exp(kappa)*((kappa - 2 * beta)*(kappa + 2 * beta))**(-0.5)
+    #return (kappa - 2 * beta) / (kappa + 2 * beta)
+    #return (((kappa - 2 * beta)*(kappa + 2 * beta))**(0.5))/2*np.pi*np.exp(kappa)
 
 def evaluate_constant(kappa, beta, max_iterations=1000):
     """
@@ -49,8 +51,8 @@ def evaluate_constant(kappa, beta, max_iterations=1000):
     return results
 
 # Example usage with fixed kappa and beta
-kappa = 7
-beta = 3
+kappa = 0.61
+beta = 0.3
 results = evaluate_constant(kappa, beta)
 
 # Print results in a table
